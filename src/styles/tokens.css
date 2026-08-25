@@ -1,0 +1,35 @@
+:root {
+  /* Color — warm dawn palette from the brand bible: terracotta, butter,
+     charcoal, against a soft bone stock. */
+  --color-bone: #f6f0e4;
+  --color-bone-deep: #efe6d3;
+  --color-charcoal: #2a221b;
+  --color-charcoal-soft: #5c4f41;
+  --color-terracotta: #b85a35;
+  --color-terracotta-deep: #9a4728;
+  --color-butter: #e7ab3b;
+  --color-rule: #ddcfb2;
+  --color-white: #fffaf1;
+
+  /* Type — an editorial serif for display, a quiet humanist sans for body
+     and utility text. */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.95rem);
+  --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --step-1: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.75rem, 1.5rem + 1.2vw, 2.5rem);
+  --step-3: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 7rem;
+
+  --content-width: 72rem;
+  --measure: 38rem;
+
+  --radius: 2px;
+}

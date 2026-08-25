@@ -1,0 +1,21 @@
+.footer {
+  padding: var(--space-md);
+  background: var(--color-bone);
+}
+
+.footer__inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+  justify-content: space-between;
+  font-size: var(--step--1);
+  color: var(--color-charcoal-soft);
+}
+
+.footer__mark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-charcoal);
+}

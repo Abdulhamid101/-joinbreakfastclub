@@ -1,0 +1,29 @@
+.cta {
+  background: var(--color-charcoal);
+}
+
+.cta__inner {
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-sm);
+}
+
+.cta__heading {
+  font-size: var(--step-2);
+  color: var(--color-bone);
+}
+
+.cta__body {
+  color: var(--color-rule);
+}
+
+.btn--light {
+  background: var(--color-butter);
+  color: var(--color-charcoal);
+  margin-top: var(--space-xs);
+}
+
+.btn--light:hover {
+  background: #f0bd5c;
+}

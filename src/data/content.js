@@ -85,3 +85,56 @@ export const cta = {
 export const footer = {
   note: "Breakfast Club · Abeokuta, Ogun State, Nigeria",
 };
+
+export const footerCta = {
+  heading: "Wellness begins at breakfast.",
+  tagline: "Eat well. Move often. Meet people. Do life together.",
+  ctaLabel: "Join the club",
+};
+
+export const footerColumns = [
+  {
+    title: "Explore",
+    links: [
+      { label: "About Us", href: "#" },
+      { label: "Our Community", href: "#" },
+      { label: "What We Do", href: "#" },
+      { label: "Journal", href: "#" },
+    ],
+  },
+  {
+    title: "Community",
+    links: [
+      { label: "Upcoming Events", href: "#" },
+      { label: "Breakfast Meetups", href: "#" },
+      { label: "Runs & Walks", href: "#" },
+      { label: "Hikes & Experiences", href: "#" },
+    ],
+  },
+  {
+    title: "Connect",
+    links: [
+      { label: "Instagram", href: "https://instagram.com" },
+      { label: "TikTok", href: "https://tiktok.com" },
+      { label: "Email Us", href: "mailto:hello@breakfastclubcommunity.com" },
+    ],
+  },
+];
+
+export const newsletter = {
+  heading: "Stay in the loop",
+  body: "Get Breakfast Club updates, events & good stuff.",
+  placeholder: "Your email address",
+  ctaLabel: "Join",
+};
+
+export const footerBottom = {
+  copyright: "© 2026 Breakfast Club",
+  location: "Lagos, Nigeria",
+  legalLinks: [
+    { label: "Privacy Policy", href: "#" },
+    { label: "Terms", href: "#" },
+    { label: "Contact", href: "mailto:hello@breakfastclubcommunity.com" },
+  ],
+  tagline: "There's always a seat at the table.",
+};

@@ -1,0 +1,30 @@
+.arcs {
+  position: absolute;
+  inset: auto 0 0;
+  height: 90px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.arc {
+  position: absolute;
+  width: 42%;
+  height: 110px;
+  border-radius: 100% 100% 0 0;
+  transform: translateY(58px);
+}
+
+.arc--one {
+  left: -5%;
+  border-top: 28px solid var(--color-butter);
+}
+
+.arc--two {
+  left: 27%;
+  border-top: 28px solid var(--color-terracotta);
+}
+
+.arc--three {
+  right: -7%;
+  border-top: 28px solid var(--color-charcoal);
+}

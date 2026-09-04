@@ -1,10 +1,7 @@
 import { audience } from "../data/content";
 import "./Audience.css";
 
-// Placeholder frames for the candid portrait grid the brand bible calls
-// for. Drop matching files into public/images/audience/ (same filenames)
-// and each frame fills in — no code changes needed.
-const portraits = [1, 2, 3, 4].map((  n) => `/images/audience/member-${n}.jpg`);
+const portraits = [1, 2, 3, 4].map((n) => `/images/audience/member-${n}.jpg`);
 
 export default function Audience() {
   return (

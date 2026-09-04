@@ -1,6 +1,5 @@
-// All site copy lives here so future updates (new copy, new chapters from
-// the brand bible, translated versions, etc.) don't require touching
-// component code.
+// All site copy lives here so future updates don't require touching
+// component code — edit this file, not the components.
 
 export const site = {
   name: "Breakfast Club",
@@ -10,10 +9,16 @@ export const site = {
 };
 
 export const hero = {
-  eyebrow: "A community wellness institution · Abeokuta",
-  heading: "Wellness begins at breakfast.",
+  eyebrow: "A community wellness institution",
+  headingLines: ["Wellness begins", "at breakfast."],
+  headingAccentLine: 1,
   sub: "Not at the gym. Not on a scale. At a table, at sunrise, with people who are glad to see you.",
-  ctaLabel: "Join the next morning",
+  primaryCta: "Join the next morning",
+  secondaryCta: "Discover Breakfast Club",
+  note: {
+    strong: "Every Saturday",
+    rest: ["7:00 AM"],
+  },
 };
 
 export const belief = {
@@ -76,14 +81,26 @@ export const audience = {
     "Doctors, students, retirees, market traders, and founders — ages 18 to 65. What keeps them coming back is rarely the exercise. It's the sense of being expected somewhere, by people who notice when they're missing.",
 };
 
+// NEW — the Saturday schedule card, pulled in from the visual identity
+// reference. Sits alongside the existing sections rather than replacing them.
+export const saturday = {
+  eyebrow: "Saturday at Breakfast Club",
+  heading: "Your Saturday morning has plans.",
+  body: "Meet up with the community every Saturday. Start with movement, stay for breakfast, and leave with new energy, new conversations and people you are glad you met.",
+  ctaLabel: "Join this Saturday",
+  schedule: [
+    { label: "When", value: "Every Saturday" },
+    { label: "Time", value: "7:00 AM" },
+    { label: "Where", value: "Abeokuta, Ogun State" },
+    { label: "Who", value: "Everyone" },
+    { label: "What to expect", value: "Move • Eat • Connect" },
+  ],
+};
+
 export const cta = {
   heading: "The next morning is coming.",
   body: "Be there for it. Join the club and hear when and where we're gathering next.",
   ctaLabel: "Join the next morning",
-};
-
-export const footer = {
-  note: "Breakfast Club · Abeokuta, Ogun State, Nigeria",
 };
 
 export const footerCta = {

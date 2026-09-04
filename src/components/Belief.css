@@ -13,6 +13,7 @@
 
 .belief__line {
   font-family: var(--font-display);
+  font-weight: 700;
   font-size: var(--step-2);
   color: var(--color-bone);
   line-height: 1.25;

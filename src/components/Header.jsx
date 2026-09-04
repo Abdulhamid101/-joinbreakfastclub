@@ -6,6 +6,7 @@ export default function Header() {
     <header className="header">
       <div className="header__inner">
         <a className="header__mark" href="#top">
+          <i className="header__mark-icon" aria-hidden="true" />
           {site.name}
         </a>
         <a className="header__cta" href={site.waitlistUrl}>

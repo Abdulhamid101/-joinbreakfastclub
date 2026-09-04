@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { hero, site } from "../data/content";
+import Arcs from "./Arcs";
 import "./Hero.css";
 
 export default function Hero() {
-  // Drop the cover photo at public/images/hero/cover.jpg and it appears
-  // automatically. Until then, the gradient + horizon line carries the
-  // section on their own, so there's no broken-image state to fix later.
   const [imageFound, setImageFound] = useState(true);
 
   return (
@@ -21,12 +19,41 @@ export default function Hero() {
       )}
       <div className="hero__inner">
         <p className="eyebrow">{hero.eyebrow}</p>
-        <h1 className="hero__heading">{hero.heading}</h1>
+
+        <h1 className="hero__heading">
+          {hero.headingLines.map((line, i) => (
+            <span key={line}>
+              {i === hero.headingAccentLine ? (
+                <span className="hero__heading-accent">{line}</span>
+              ) : (
+                line
+              )}
+              {i < hero.headingLines.length - 1 && <br />}
+            </span>
+          ))}
+        </h1>
+
         <p className="hero__sub measure">{hero.sub}</p>
-        <a className="btn" href={site.waitlistUrl}>
-          {hero.ctaLabel}
-        </a>
+
+        <div className="hero__actions">
+          <a className="btn" href={site.waitlistUrl}>
+            {hero.primaryCta}
+          </a>
+          <a className="btn btn--outline" href="#why-we-exist">
+            {hero.secondaryCta}
+          </a>
+        </div>
+
+        <div className="hero__note">
+          <strong>{hero.note.strong}</strong>
+          {hero.note.rest.map((item) => (
+            <span key={item}>
+              <span aria-hidden="true">·</span> {item}
+            </span>
+          ))}
+        </div>
       </div>
+      <Arcs />
     </section>
   );
 }

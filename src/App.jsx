@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import Belief from "./components/Belief";
 import Mission from "./components/Mission";
 import MorningTimeline from "./components/MorningTimeline";
+import Saturday from "./components/Saturday";
 import Values from "./components/Values";
 import Audience from "./components/Audience";
 import CTA from "./components/CTA";
@@ -17,6 +18,7 @@ export default function App() {
         <Belief />
         <Mission />
         <MorningTimeline />
+        <Saturday />
         <Values />
         <Audience />
         <CTA />

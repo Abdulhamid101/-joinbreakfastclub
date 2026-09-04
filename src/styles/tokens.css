@@ -1,20 +1,25 @@
 :root {
-  /* Color — warm dawn palette from the brand bible: terracotta, butter,
-     charcoal, against a soft bone stock. */
-  --color-bone: #f6f0e4;
-  --color-bone-deep: #efe6d3;
-  --color-charcoal: #2a221b;
-  --color-charcoal-soft: #5c4f41;
-  --color-terracotta: #b85a35;
-  --color-terracotta-deep: #9a4728;
-  --color-butter: #e7ab3b;
-  --color-rule: #ddcfb2;
-  --color-white: #fffaf1;
+  /* Color — updated to the official brand guideline palette (deep green,
+     leaf green, orange, red-orange, cream). Variable NAMES are unchanged
+     from the original build so every existing component keeps working —
+     only the values changed. */
+  --color-bone: #fcf0da;
+  --color-bone-deep: #f5e3ba;
+  --color-charcoal: #0e301f;
+  --color-charcoal-soft: #3f5c46;
+  --color-terracotta: #84b82f;
+  --color-terracotta-deep: #6b9625;
+  --color-butter: #fca10c;
+  --color-accent2: #fc5b0d;
+  --color-rule: #e8d6ac;
+  --color-white: #ffffff;
 
-  /* Type — an editorial serif for display, a quiet humanist sans for body
-     and utility text. */
-  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
-  --font-body: "Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Type — DM Sans is the brand's primary font (headline + body).
+     Pacifico is the reserved script accent for occasional flourish use
+     via the new .script utility class. */
+  --font-display: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-accent: "Pacifico", cursive;
 
   --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.95rem);
   --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
@@ -31,5 +36,10 @@
   --content-width: 72rem;
   --measure: 38rem;
 
+  /* Two radius scales now: the original hairline radius for small
+     elements (inputs, rules), and a new large one for card-style blocks
+     brought in from the guideline (schedule card, buttons). */
   --radius: 2px;
+  --radius-lg: 28px;
+  --shadow: 0 18px 50px rgba(14, 48, 31, 0.1);
 }

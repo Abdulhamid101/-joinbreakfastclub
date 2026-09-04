@@ -35,7 +35,7 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.08;
   margin: 0;
   color: var(--color-charcoal);
@@ -70,7 +70,14 @@ svg {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-terracotta-deep);
-  font-weight: 600;
+  font-weight: 700;
+}
+
+/* NEW — script accent utility for occasional flourish text, per the
+   brand guideline's reserved use of the script font. Use sparingly. */
+.script {
+  font-family: var(--font-accent);
+  font-weight: 400;
 }
 
 .section {
@@ -86,6 +93,8 @@ svg {
   max-width: var(--measure);
 }
 
+/* Button is now pill-shaped per the guideline, replacing the old sharp
+   corners — everywhere .btn is used updates automatically. */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -94,17 +103,18 @@ svg {
   background: var(--color-terracotta);
   color: var(--color-white);
   border: none;
-  border-radius: var(--radius);
+  border-radius: 999px;
   font-size: var(--step--1);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.02em;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 160ms ease, transform 160ms ease;
+  transition: background-color 160ms ease, transform 160ms ease, opacity 160ms ease;
 }
 
 .btn:hover {
   background: var(--color-terracotta-deep);
+  transform: translateY(-1px);
 }
 
 .btn:active {

@@ -7,7 +7,7 @@ export default function CTA() {
       <div className="section__inner cta__inner">
         <h2 className="cta__heading">{cta.heading}</h2>
         <p className="cta__body measure">{cta.body}</p>
-        <a className="btn btn--light" href="mailto:hello@joinbreakfastclub.com">
+        <a className="btn btn--light" href="mailto:hello@breakfastclubcommunity.com">
           {cta.ctaLabel}
         </a>
       </div>

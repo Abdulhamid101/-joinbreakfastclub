@@ -1,0 +1,71 @@
+.saturday {
+  background: var(--color-terracotta);
+  padding: var(--space-xl) var(--space-md);
+}
+
+.saturday__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.eyebrow--light {
+  color: var(--color-charcoal);
+  opacity: 0.75;
+}
+
+.saturday__heading {
+  font-size: var(--step-2);
+  color: var(--color-charcoal);
+  margin: var(--space-xs) 0 var(--space-sm);
+}
+
+.saturday__body {
+  color: rgba(14, 48, 31, 0.75);
+  margin-bottom: var(--space-md);
+}
+
+.btn--dark {
+  background: var(--color-charcoal);
+}
+
+.btn--dark:hover {
+  background: #0a2417;
+}
+
+.saturday__card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow);
+}
+
+.saturday__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--color-rule);
+  font-size: var(--step--1);
+}
+
+.saturday__row:last-child {
+  border-bottom: none;
+}
+
+.saturday__row strong {
+  color: var(--color-charcoal);
+}
+
+.saturday__row span {
+  color: var(--color-charcoal-soft);
+  text-align: right;
+}
+
+@media (max-width: 800px) {
+  .saturday__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}

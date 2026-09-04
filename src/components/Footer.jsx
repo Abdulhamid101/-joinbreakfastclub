@@ -13,8 +13,6 @@ export default function Footer() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // Wire this up to your email tool (Mailchimp, ConvertKit, etc.) later.
-    // For now it just confirms the tap worked.
     alert(`Thanks — we'll be in touch at ${email}`);
     setEmail("");
   }

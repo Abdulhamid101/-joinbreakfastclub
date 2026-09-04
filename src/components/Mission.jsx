@@ -3,7 +3,7 @@ import "./Mission.css";
 
 export default function Mission() {
   return (
-    <section className="mission section">
+    <section id="why-we-exist" className="mission section">
       <div className="section__inner mission__grid">
         <div>
           <p className="eyebrow">{mission.eyebrow}</p>

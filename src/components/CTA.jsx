@@ -1,4 +1,4 @@
-import { cta } from "../data/content";
+import { cta, site } from "../data/content";
 import "./CTA.css";
 
 export default function CTA() {
@@ -7,7 +7,7 @@ export default function CTA() {
       <div className="section__inner cta__inner">
         <h2 className="cta__heading">{cta.heading}</h2>
         <p className="cta__body measure">{cta.body}</p>
-        <a className="btn btn--light" href="mailto:hello@breakfastclubcommunity.com">
+        <a className="btn btn--light" href={`mailto:${site.email}`}>
           {cta.ctaLabel}
         </a>
       </div>

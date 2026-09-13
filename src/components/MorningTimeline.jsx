@@ -1,12 +1,12 @@
-import { timeline } from "../data/content";
+import { timeline, timelineSection } from "../data/content";
 import "./MorningTimeline.css";
 
 export default function MorningTimeline() {
   return (
     <section className="timeline section">
       <div className="section__inner">
-        <p className="eyebrow">The morning is sacred</p>
-        <h2 className="timeline__heading">One road, three hours.</h2>
+        <p className="eyebrow">{timelineSection.eyebrow}</p>
+        <h2 className="timeline__heading">{timelineSection.heading}</h2>
         <div className="timeline__track">
           {timeline.map((stop, i) => (
             <div className="timeline__stop" key={stop.time}>

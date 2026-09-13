@@ -4,6 +4,7 @@ import {
   footerColumns,
   newsletter,
   footerBottom,
+  site,
 } from "../data/content";
 import "./Footer.css";
 
@@ -85,13 +86,10 @@ export default function Footer() {
               ))}
             </nav>
             <div className="footer__socials">
-              <a href="https://instagram.com" aria-label="Instagram">
+              <a href={site.instagramUrl} aria-label="Instagram">
                 <CircleIcon />
               </a>
-              <a href="https://tiktok.com" aria-label="TikTok">
-                <CircleIcon />
-              </a>
-              <a href="mailto:hello@breakfastclubcommunity.com" aria-label="Email">
+              <a href={`mailto:${site.email}`} aria-label="Email">
                 <CircleIcon />
               </a>
             </div>

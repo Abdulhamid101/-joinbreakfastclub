@@ -166,3 +166,120 @@ export const footerBottom = {
   ],
   tagline: "There's always a seat at the table.",
 };
+
+// 03 — Our Experiences
+export const experiencesSection = {
+  eyebrow: "Something for every body",
+  heading: "Our experiences.",
+  intro: "Breakfast Club brings different forms of wellness into one community.",
+};
+
+export const experienceCategories = [
+  {
+    title: "Fitness & Movement",
+    body: "From beginner-friendly activities to more energetic sessions, there's always a way to get moving. And we're always exploring new ways to move.",
+    tags: [
+      "Running",
+      "Walking",
+      "Hiking",
+      "Yoga",
+      "Pilates",
+      "Tabata",
+      "Dance",
+      "Swimming",
+      "Fitness Classes",
+    ],
+  },
+  {
+    title: "Wellness Experiences",
+    body: "Wellness isn't only physical. We create experiences around the things that help us live better, feel better, and understand ourselves better.",
+    tags: [
+      "Wellness Talks",
+      "Health Check-ups",
+      "Mental Wellness Conversations",
+      "Community Walks",
+      "Cause-Based Activities",
+      "Educational Sessions",
+    ],
+  },
+  {
+    title: "Community & Social",
+    body: "Sometimes the best part of wellness is simply having people around you.",
+    tags: [
+      "Community Meetups",
+      "Networking",
+      "Social Experiences",
+      "Games & Activities",
+      "Special Events",
+    ],
+  },
+];
+
+// 04 — Breakfast & Beverages
+export const menuSection = {
+  eyebrow: "Yes, there's actually breakfast",
+  heading: "Breakfast & beverages.",
+  intro:
+    "We believe the best mornings deserve good food. At our community meetups, we serve a rotating selection of simple breakfast options and beverages designed to complement the experience.",
+  closing: "The menu evolves with the community.",
+};
+
+export const menuItems = [
+  { title: "Coffee", body: "Cappuccino, latte and more." },
+  { title: "Smoothies", body: "Fresh, refreshing fruit-based blends." },
+  {
+    title: "Matcha",
+    body: "For those who like their mornings with a little more energy.",
+  },
+  {
+    title: "Iced Teas & Juices",
+    body: "Refreshing options for the warmer mornings.",
+  },
+  {
+    title: "Breakfast Bites",
+    body: "From banana bread and cookies to other simple breakfast treats.",
+  },
+];
+
+// 06 — More Than A Meetup
+export const moreThanMeetup = {
+  eyebrow: "More than a meetup",
+  heading: "We're building a community.",
+  body:
+    "Breakfast Club isn't just an event you attend. It's a community you can belong to. As we grow, our experiences will extend beyond Saturday morning meetups into:",
+  initiatives: [
+    "Community wellness initiatives",
+    "Health & fitness programs",
+    "Cause-based walks and runs",
+    "Fundraisers",
+    "Community service",
+    "Wellness education",
+    "Collaborations & partnerships",
+  ],
+  closing:
+    "Because when people come together, wellness can create an impact far beyond the individual.",
+};
+
+// 07 — Our Vision
+export const vision = {
+  eyebrow: "Our vision",
+  heading: "A healthier, more connected community.",
+  intro:
+    "We want to make wellness more accessible, social, and enjoyable. We're building a community where taking care of yourself doesn't mean doing it alone.",
+  lines: [
+    "Where fitness can introduce you to a new friend.",
+    "Where breakfast can become a conversation.",
+    "Where a Saturday morning can become the highlight of your week.",
+    "And where a community can come together to create something bigger than itself.",
+  ],
+  closing: "This is the world we're building.",
+};
+
+// 09 — Partnerships
+export const partnerships = {
+  eyebrow: "Partnerships",
+  heading: "Let's build something healthier together.",
+  body:
+    "Breakfast Club works with brands, businesses, fitness professionals, wellness practitioners, creators, and organizations that believe in healthier communities. From event sponsorships and product partnerships to wellness activations and community initiatives, we're open to collaborations that create genuine value.",
+  ctaLabel: "Partner With Us",
+};

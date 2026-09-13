@@ -1,0 +1,47 @@
+.vision {
+  background: var(--color-charcoal);
+  color: var(--color-bone);
+  text-align: center;
+}
+
+.vision .eyebrow--onDark {
+  color: var(--color-terracotta-light, var(--color-terracotta));
+}
+
+.vision__heading {
+  font-size: var(--step-2);
+  margin: var(--space-xs) auto var(--space-sm);
+  color: var(--color-bone);
+}
+
+.vision__intro {
+  color: var(--color-bone-deep);
+  margin: 0 auto var(--space-lg);
+}
+
+.vision__lines {
+  list-style: none;
+  margin: 0 auto var(--space-lg);
+  padding: 0;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.vision__lines li {
+  font-size: var(--step-1);
+  color: var(--color-bone);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: var(--space-sm);
+}
+
+.vision__lines li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.vision__closing {
+  font-size: var(--step-2);
+  color: var(--color-terracotta-light, var(--color-terracotta));
+}

@@ -1,0 +1,35 @@
+.partnerships {
+  background: var(--color-bone-deep);
+}
+
+.partnerships__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.partnerships__heading {
+  font-size: var(--step-2);
+  margin: var(--space-xs) 0 0;
+}
+
+.partnerships__body {
+  color: var(--color-charcoal-soft);
+  margin-bottom: var(--space-md);
+}
+
+.partnerships .btn--dark {
+  background: var(--color-charcoal);
+}
+
+.partnerships .btn--dark:hover {
+  background: #0a2417;
+}
+
+@media (max-width: 800px) {
+  .partnerships__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}

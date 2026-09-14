@@ -3,7 +3,7 @@ import "./Saturday.css";
 
 export default function Saturday() {
   return (
-    <section className="saturday">
+    <section id="saturday" className="saturday">
       <div className="section__inner saturday__grid">
         <div>
           <p className="eyebrow eyebrow--light">{saturday.eyebrow}</p>

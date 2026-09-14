@@ -3,7 +3,7 @@ import "./MoreThanMeetup.css";
 
 export default function MoreThanMeetup() {
   return (
-    <section className="more section">
+    <section id="community" className="more section">
       <div className="section__inner more__grid">
         <div>
           <p className="eyebrow">{moreThanMeetup.eyebrow}</p>

@@ -5,7 +5,7 @@ const portraits = [1, 2, 3, 4].map((n) => `/images/audience/member-${n}.jpg`);
 
 export default function Audience() {
   return (
-    <section className="audience section">
+    <section id="audience" className="audience section">
       <div className="section__inner">
         <p className="eyebrow">{audience.eyebrow}</p>
         <h2 className="audience__heading">{audience.heading}</h2>

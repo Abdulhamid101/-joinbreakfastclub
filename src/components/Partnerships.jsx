@@ -3,7 +3,7 @@ import "./Partnerships.css";
 
 export default function Partnerships() {
   return (
-    <section className="partnerships section">
+    <section id="partnerships" className="partnerships section">
       <div className="section__inner partnerships__grid">
         <div>
           <p className="eyebrow">{partnerships.eyebrow}</p>

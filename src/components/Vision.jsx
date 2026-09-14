@@ -3,7 +3,7 @@ import "./Vision.css";
 
 export default function Vision() {
   return (
-    <section className="vision section">
+    <section id="vision" className="vision section">
       <div className="section__inner">
         <p className="eyebrow eyebrow--onDark">{vision.eyebrow}</p>
         <h2 className="vision__heading">{vision.heading}</h2>

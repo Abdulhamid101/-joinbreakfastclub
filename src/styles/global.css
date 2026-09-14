@@ -84,6 +84,13 @@ svg {
   padding: var(--space-xl) var(--space-md);
 }
 
+/* Anchor targets (footer/nav links, #join, #why-we-exist, etc.) land
+   right under the sticky header without this — the heading gets
+   hidden behind it on scroll-to. */
+section[id] {
+  scroll-margin-top: 88px;
+}
+
 .section__inner {
   max-width: var(--content-width);
   margin: 0 auto;

@@ -3,7 +3,7 @@ import "./Menu.css";
 
 export default function Menu() {
   return (
-    <section className="menu section">
+    <section id="menu" className="menu section">
       <div className="section__inner">
         <p className="eyebrow">{menuSection.eyebrow}</p>
         <h2 className="menu__heading">{menuSection.heading}</h2>

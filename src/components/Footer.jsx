@@ -14,7 +14,14 @@ export default function Footer() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    alert(`Thanks — we'll be in touch at ${email}`);
+    // No newsletter service is wired up yet — this opens the visitor's own
+    // mail client with the address pre-filled, addressed to the community
+    // inbox, so signups still reach someone instead of vanishing. Swap this
+    // for a real provider (Zoho Campaigns, Mailchimp, etc.) once one is set
+    // up — see the TODO in this file.
+    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
+      "Newsletter signup"
+    )}&body=${encodeURIComponent(`Please add me to the list: ${email}`)}`;
     setEmail("");
   }
 
@@ -61,6 +68,7 @@ export default function Footer() {
             <input
               type="email"
               required
+              aria-label={newsletter.placeholder}
               placeholder={newsletter.placeholder}
               value={email}
               onChange={(e) => setEmail(e.target.value)}

@@ -126,17 +126,17 @@ export const footerColumns = [
     title: "Explore",
     links: [
       { label: "What Is Breakfast Club", href: "#why-we-exist" },
-      { label: "The Experience", href: "#" },
-      { label: "Saturday Mornings", href: "#" },
-      { label: "Who It's For", href: "#" },
+      { label: "The Experience", href: "#experiences" },
+      { label: "Saturday Mornings", href: "#saturday" },
+      { label: "Who It's For", href: "#audience" },
     ],
   },
   {
     title: "Community",
     links: [
-      { label: "Fitness & Movement", href: "#" },
-      { label: "Wellness Experiences", href: "#" },
-      { label: "Community & Social", href: "#" },
+      { label: "Fitness & Movement", href: "#experiences" },
+      { label: "Wellness Experiences", href: "#experiences" },
+      { label: "Community & Social", href: "#community" },
     ],
   },
   {

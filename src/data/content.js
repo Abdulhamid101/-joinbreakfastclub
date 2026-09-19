@@ -5,7 +5,7 @@ export const site = {
   name: "Breakfast Club",
   tagline: "Wellness begins at breakfast.",
   location: "Abeokuta, Ogun State, Nigeria",
-  waitlistUrl: "#join",
+  waitlistUrl: "/#join",
   email: "hello@joinbreakfastclub.world",
   instagramHandle: "@joinbreakfastclub",
   instagramUrl: "https://instagram.com/joinbreakfastclub",
@@ -125,18 +125,19 @@ export const footerColumns = [
   {
     title: "Explore",
     links: [
-      { label: "What Is Breakfast Club", href: "#why-we-exist" },
-      { label: "The Experience", href: "#experiences" },
-      { label: "Saturday Mornings", href: "#saturday" },
-      { label: "Who It's For", href: "#audience" },
+      { label: "What Is Breakfast Club", href: "/#why-we-exist" },
+      { label: "The Experience", href: "/#experiences" },
+      { label: "Order Drinks", href: "/drinks" },
+      { label: "Saturday Mornings", href: "/#saturday" },
+      { label: "Who It's For", href: "/#audience" },
     ],
   },
   {
     title: "Community",
     links: [
-      { label: "Fitness & Movement", href: "#experiences" },
-      { label: "Wellness Experiences", href: "#experiences" },
-      { label: "Community & Social", href: "#community" },
+      { label: "Fitness & Movement", href: "/#experiences" },
+      { label: "Wellness Experiences", href: "/#experiences" },
+      { label: "Community & Social", href: "/#community" },
     ],
   },
   {
@@ -144,7 +145,7 @@ export const footerColumns = [
     links: [
       { label: "Instagram", href: "https://instagram.com/joinbreakfastclub" },
       { label: "Contact Us", href: "mailto:hello@joinbreakfastclub.world" },
-      { label: "Join the Community", href: "#join" },
+      { label: "Join the Community", href: "/#join" },
     ],
   },
 ];
@@ -222,6 +223,7 @@ export const menuSection = {
   intro:
     "We believe the best mornings deserve good food. At our community meetups, we serve a rotating selection of simple breakfast options and beverages designed to complement the experience.",
   closing: "The menu evolves with the community.",
+  orderCta: "Order drinks ahead",
 };
 
 export const menuItems = [

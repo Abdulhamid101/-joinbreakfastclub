@@ -16,6 +16,11 @@ export default function Menu() {
             </li>
           ))}
         </ul>
+        <div className="menu__order">
+          <a className="btn" href="/drinks">
+            {menuSection.orderCta} →
+          </a>
+        </div>
         <p className="menu__closing script">{menuSection.closing}</p>
       </div>
     </section>

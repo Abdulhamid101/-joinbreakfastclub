@@ -68,3 +68,57 @@
     padding: 1rem var(--space-sm);
   }
 }
+
+/* Nav — Drinks link + cart button sit before the Join pill. */
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header__link {
+  font-size: var(--step--1);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-charcoal);
+  padding: 0.6rem 0.75rem;
+  border-radius: 999px;
+}
+
+.header__link:hover,
+.header__link[aria-current="page"] {
+  background: var(--color-bone-deep);
+}
+
+.header__cart {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-charcoal);
+  cursor: pointer;
+}
+
+.header__cart:hover {
+  background: var(--color-bone-deep);
+}
+
+.header__badge {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background: var(--color-accent2);
+  color: var(--color-white);
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  text-align: center;
+}

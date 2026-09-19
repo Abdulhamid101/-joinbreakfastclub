@@ -39,7 +39,7 @@ export default function Footer() {
           )}
           <h2 className="footer__heading">{footerCta.heading}</h2>
           <p className="footer__tagline">{footerCta.tagline}</p>
-          <a className="btn btn--light" href="#join">
+          <a className="btn btn--light" href="/#join">
             {footerCta.ctaLabel}
           </a>
         </div>

@@ -1,39 +1,29 @@
 import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Belief from "./components/Belief";
-import Mission from "./components/Mission";
-import Values from "./components/Values";
-import Experiences from "./components/Experiences";
-import Menu from "./components/Menu";
-import MorningTimeline from "./components/MorningTimeline";
-import Saturday from "./components/Saturday";
-import MoreThanMeetup from "./components/MoreThanMeetup";
-import Vision from "./components/Vision";
-import Audience from "./components/Audience";
-import Partnerships from "./components/Partnerships";
-import CTA from "./components/CTA";
 import Footer from "./components/Footer";
+import CartDrawer from "./components/CartDrawer";
+import HomePage from "./pages/HomePage";
+import DrinksPage from "./pages/DrinksPage";
+import { CartProvider } from "./shop/cart";
+
+// Tiny path router — no extra dependency. Add a page: add a line here and
+// its path to vercel.json is NOT needed (the catch-all rewrite covers it).
+const routes = {
+  "/": HomePage,
+  "/drinks": DrinksPage,
+};
 
 export default function App() {
+  const path = window.location.pathname.replace(/\/+$/, "") || "/";
+  const Page = routes[path] || HomePage;
+
   return (
-    <>
-      <Header />
+    <CartProvider>
+      <Header path={path} />
       <main>
-        <Hero />
-        <Belief />
-        <Mission />
-        <Values />
-        <Experiences />
-        <Menu />
-        <MorningTimeline />
-        <Saturday />
-        <MoreThanMeetup />
-        <Vision />
-        <Audience />
-        <Partnerships />
-        <CTA />
+        <Page />
       </main>
       <Footer />
-    </>
+      <CartDrawer />
+    </CartProvider>
   );
 }

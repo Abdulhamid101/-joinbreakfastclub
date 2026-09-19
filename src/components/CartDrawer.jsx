@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { shop } from "../data/drinks";
+import { combo, defaultOptions, drinks, isBite, shop } from "../data/drinks";
 import { formatNaira, useCart } from "../shop/cart";
 import {
   emailUrl,
@@ -80,6 +80,7 @@ export default function CartDrawer() {
       id: makeOrderId(),
       items: cart.items,
       subtotal: cart.subtotal,
+      discount: cart.discount,
       deliveryFee: cart.deliveryFee,
       total: cart.total,
       fulfilment: cart.fulfilment,
@@ -158,7 +159,7 @@ export default function CartDrawer() {
           <div className="drawer__empty">
             <p>Your cart is empty.</p>
             <a className="btn" href="/drinks#shop" onClick={cart.close}>
-              Browse drinks
+              Browse the menu
             </a>
           </div>
         )}
@@ -172,7 +173,7 @@ export default function CartDrawer() {
                   <div className="line__info">
                     <p className="line__name">{item.drink.name}</p>
                     <p className="line__meta">
-                      {[item.size, item.optionsText].filter(Boolean).join(" · ")} ·{" "}
+                      {item.detail ? `${item.detail} · ` : ""}
                       {formatNaira(item.price)}
                     </p>
                     <div className="line__controls">
@@ -191,6 +192,8 @@ export default function CartDrawer() {
                 </li>
               ))}
             </ul>
+
+            <ComboNudge cart={cart} />
 
             <fieldset className="fulfil">
               <legend>How do you want it?</legend>
@@ -334,9 +337,71 @@ function LineThumb({ drink }) {
       {drink.image && !failed ? (
         <img src={drink.image} alt="" onError={() => setFailed(true)} />
       ) : (
-        <DrinkCup colors={drink.colors} />
+        <DrinkCup colors={drink.colors} bite={isBite(drink)} />
       )}
     </div>
+  );
+}
+
+// Nudges toward a complete combo: suggests bites when there are more drinks
+// than bites, and a drink when there are more bites.
+function ComboNudge({ cart }) {
+  if (!combo.enabled) return null;
+  const { drinkQty, biteQty } = cart.combo;
+  if (drinkQty === biteQty) {
+    return cart.combo.pairs > 0 ? (
+      <p className="nudge nudge--done">
+        You're saving {formatNaira(cart.discount)} with the {combo.label.toLowerCase()}.
+      </p>
+    ) : null;
+  }
+
+  const wantBite = drinkQty > biteQty;
+  const suggestions = drinks.filter((d) => d.available && isBite(d) === wantBite).slice(0, 4);
+  if (!suggestions.length) return null;
+
+  return (
+    <div className="nudge">
+      <p className="nudge__title">
+        {wantBite ? "Add a bite" : "Add a drink"}, save {formatNaira(combo.discount)}
+        <small>
+          {combo.pitch} = {combo.label.toLowerCase()}
+        </small>
+      </p>
+      <ul className="nudge__list">
+        {suggestions.map((d) => {
+          const size = d.sizes[0];
+          return (
+            <li key={d.id}>
+              <button
+                type="button"
+                className="nudge__item"
+                onClick={() => cart.add(d.id, size.label, defaultOptions(d), 1)}
+              >
+                <NudgeThumb drink={d} />
+                <span className="nudge__name">{d.name}</span>
+                <span className="nudge__price">
+                  {formatNaira(size.price)} <b>+ Add</b>
+                </span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+function NudgeThumb({ drink }) {
+  const [failed, setFailed] = useState(false);
+  return (
+    <span className="nudge__thumb" style={{ background: drink.colors.bg }}>
+      {drink.image && !failed ? (
+        <img src={drink.image} alt="" loading="lazy" onError={() => setFailed(true)} />
+      ) : (
+        <DrinkCup colors={drink.colors} bite={isBite(drink)} />
+      )}
+    </span>
   );
 }
 
@@ -347,6 +412,14 @@ function Totals({ cart, compact }) {
         <dt>Subtotal</dt>
         <dd>{formatNaira(cart.subtotal)}</dd>
       </div>
+      {cart.discount > 0 && (
+        <div className="totals__saving">
+          <dt>
+            {combo.label} × {cart.combo.pairs}
+          </dt>
+          <dd>−{formatNaira(cart.discount)}</dd>
+        </div>
+      )}
       <div>
         <dt>{cart.fulfilment === "delivery" ? "Delivery" : "Pickup"}</dt>
         <dd>{cart.deliveryFee ? formatNaira(cart.deliveryFee) : "Free"}</dd>
@@ -392,11 +465,17 @@ function Done({ placed, onClose }) {
           <li key={i.key}>
             <span>
               {i.qty} × {i.drink.name}{" "}
-              <small>({[i.size, i.optionsText].filter(Boolean).join(", ")})</small>
+              {i.detail && <small>({i.detail})</small>}
             </span>
             <span>{formatNaira(i.total)}</span>
           </li>
         ))}
+        {order.discount > 0 && (
+          <li className="done__saving">
+            <span>Combo savings</span>
+            <span>−{formatNaira(order.discount)}</span>
+          </li>
+        )}
         <li className="done__total">
           <span>Total</span>
           <span>{formatNaira(order.total)}</span>

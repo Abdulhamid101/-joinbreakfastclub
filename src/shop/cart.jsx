@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { drinks, optionsSummary, shop, unitPrice } from "../data/drinks";
+import { comboDiscount, drinks, itemDetail, shop, unitPrice } from "../data/drinks";
 import { nextPickup } from "./schedule";
 
 const STORAGE_KEY = "bc-cart-v2";
@@ -63,11 +63,12 @@ export function CartProvider({ children }) {
         drink,
         price,
         total: price * line.qty,
-        optionsText: optionsSummary(drink, line.opts),
+        detail: itemDetail(drink, line.size, line.opts),
       };
     });
     const count = items.reduce((n, i) => n + i.qty, 0);
     const subtotal = items.reduce((n, i) => n + i.total, 0);
+    const combo = comboDiscount(items);
     const deliveryFee = fulfilment === "delivery" && count > 0 ? shop.deliveryFee : 0;
 
     return {
@@ -75,7 +76,9 @@ export function CartProvider({ children }) {
       count,
       subtotal,
       deliveryFee,
-      total: subtotal + deliveryFee,
+      combo,
+      discount: combo.discount,
+      total: subtotal - combo.discount + deliveryFee,
       fulfilment,
       setFulfilment,
       pickup,

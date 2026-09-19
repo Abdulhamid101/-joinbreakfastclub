@@ -1,6 +1,7 @@
 // Illustrated iced drink in a clear cup, tinted per drink. Used whenever a
 // drink has no photo set in data/drinks.js.
-export default function DrinkCup({ colors, className = "" }) {
+export default function DrinkCup({ colors, className = "", bite = false }) {
+  if (bite) return <BitePlate colors={colors} className={className} />;
   const { liquid, top, accent } = colors;
   const id = `cup-${liquid.replace("#", "")}`;
   return (
@@ -44,6 +45,24 @@ export default function DrinkCup({ colors, className = "" }) {
       <ellipse cx="80" cy="150" rx="17" ry="11" fill="#fcf0da" opacity="0.92" />
       <path d="M71 151 a9 6 0 0 1 18 0" stroke="#fca10c" strokeWidth="2.4" fill="none" />
       <path d="M75 153 a8 5 0 0 1 14 0" stroke="#84b82f" strokeWidth="2" fill="none" />
+    </svg>
+  );
+}
+
+// Fallback for bites: a plate with a slice/treat, tinted per item.
+function BitePlate({ colors, className }) {
+  const { liquid, top, accent } = colors;
+  return (
+    <svg className={className} viewBox="0 0 160 200" aria-hidden="true">
+      <ellipse cx="80" cy="150" rx="66" ry="20" fill="#fff" stroke="#0e301f" strokeOpacity="0.15" strokeWidth="2" />
+      <ellipse cx="80" cy="147" rx="46" ry="12" fill="#fcf0da" />
+      <path d="M40 140 L44 92 Q46 78 60 76 L104 76 Q118 78 120 92 L122 140 Z" fill={liquid} />
+      <path d="M44 92 Q46 78 60 76 L104 76 Q118 78 120 92 Q84 100 44 92 Z" fill={accent} opacity="0.85" />
+      <path d="M40 140 L122 140 L121 128 Q80 134 41 128 Z" fill={top} opacity="0.7" />
+      <circle cx="66" cy="110" r="4" fill={accent} opacity="0.6" />
+      <circle cx="94" cy="104" r="3.5" fill={accent} opacity="0.6" />
+      <circle cx="82" cy="122" r="3" fill={accent} opacity="0.6" />
+      <path d="M58 60 q4 -8 0 -16 M80 56 q4 -8 0 -16 M102 60 q4 -8 0 -16" stroke="#0e301f" strokeOpacity="0.18" strokeWidth="3" strokeLinecap="round" fill="none" />
     </svg>
   );
 }

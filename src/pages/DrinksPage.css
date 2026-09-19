@@ -117,6 +117,68 @@
   color: var(--color-bone);
 }
 
+.combo-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  margin-bottom: var(--space-md);
+  padding: 1rem 1.25rem;
+  border-radius: 20px;
+  background: var(--color-white);
+  border: 1.5px dashed var(--color-terracotta);
+}
+
+.combo-banner p {
+  flex: 1 1 16rem;
+  color: var(--color-charcoal-soft);
+  font-size: var(--step--1);
+}
+
+.combo-banner strong {
+  color: var(--color-charcoal);
+}
+
+.combo-banner__tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  background: var(--color-accent2);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+}
+
+.combo-banner__link {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--color-terracotta-deep);
+  cursor: pointer;
+}
+
+.drink__size {
+  font-size: var(--step--1);
+  font-weight: 700;
+}
+
+.drink__combo {
+  margin-top: auto;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-accent2);
+}
+
+.drink__combo + .seg,
+.drink__combo + .drink__opts,
+.drink__combo ~ .seg {
+  margin-top: 0;
+}
+
 .drinks-grid {
   list-style: none;
   margin: 0;

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import {
   categories,
+  combo,
+  isBite,
   defaultOptions,
   drinks,
   drinksPage,
@@ -17,7 +19,7 @@ export default function DrinksPage() {
   const cart = useCart();
 
   useEffect(() => {
-    document.title = "Drinks — Order Ahead | Breakfast Club";
+    document.title = "Drinks & Bites — Order Ahead | Breakfast Club";
   }, []);
 
   const shown = category === "All" ? drinks : drinks.filter((d) => d.category === category);
@@ -73,6 +75,21 @@ export default function DrinksPage() {
             </div>
           </div>
 
+          {combo.enabled && (
+            <div className="combo-banner">
+              <span className="combo-banner__tag">{combo.label}</span>
+              <p>
+                <strong>{combo.pitch}</strong> — save {formatNaira(combo.discount)} on every pair.
+                Applied automatically at checkout.
+              </p>
+              {category !== "Bites" && (
+                <button type="button" className="combo-banner__link" onClick={() => setCategory("Bites")}>
+                  See the bites →
+                </button>
+              )}
+            </div>
+          )}
+
           <ul className="drinks-grid">
             {shown.map((drink) => (
               <DrinkCard key={drink.id} drink={drink} onAdd={cart.add} />
@@ -113,7 +130,7 @@ export default function DrinksPage() {
       {cart.count > 0 && !cart.isOpen && (
         <button type="button" className="cart-bar" onClick={cart.open}>
           <span>
-            View cart · {cart.count} {cart.count === 1 ? "drink" : "drinks"}
+            View cart · {cart.count} {cart.count === 1 ? "item" : "items"}
           </span>
           <strong>{formatNaira(cart.subtotal)}</strong>
         </button>
@@ -156,7 +173,7 @@ function DrinkCard({ drink, onAdd }) {
             onError={() => setPhotoFailed(true)}
           />
         ) : (
-          <DrinkCup className="drink__cup" colors={drink.colors} />
+          <DrinkCup className="drink__cup" colors={drink.colors} bite={isBite(drink)} />
         )}
       </div>
 
@@ -166,11 +183,20 @@ function DrinkCard({ drink, onAdd }) {
           <span className="drink__price">{formatNaira(price)}</span>
         </div>
         <p className="drink__desc">{drink.description}</p>
+        {isBite(drink) && drink.sizes.length === 1 && (
+          <p className="drink__size">{drink.sizes[0].label}</p>
+        )}
         <ul className="drink__tags">
           {drink.tags.map((t) => (
             <li key={t}>{t}</li>
           ))}
         </ul>
+
+        {combo.enabled && drink.available && (
+          <p className="drink__combo">
+            + {isBite(drink) ? "any drink" : "any bite"} = save {formatNaira(combo.discount)}
+          </p>
+        )}
 
         {drink.available ? (
           <>

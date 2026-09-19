@@ -11,7 +11,7 @@ export function makeOrderId() {
 export function orderSummaryText(order) {
   const lines = order.items.map(
     (i) =>
-      `• ${i.qty} × ${i.drink.name} (${[i.size, i.optionsText].filter(Boolean).join(", ")}) — ${formatNaira(i.total)}`
+      `• ${i.qty} × ${i.drink.name}${i.detail ? ` (${i.detail})` : ""} — ${formatNaira(i.total)}`
   );
   const how =
     order.fulfilment === "delivery"
@@ -24,6 +24,7 @@ export function orderSummaryText(order) {
     ...lines,
     "",
     `Subtotal: ${formatNaira(order.subtotal)}`,
+    order.discount ? `Combo savings: −${formatNaira(order.discount)}` : null,
     order.deliveryFee ? `Delivery: ${formatNaira(order.deliveryFee)}` : null,
     `Total: ${formatNaira(order.total)}`,
     "",
@@ -106,7 +107,7 @@ export async function payWithPaystack(order) {
             display_name: "Items",
             variable_name: "items",
             value: order.items
-              .map((i) => `${i.qty}x ${i.drink.name} (${[i.size, i.optionsText].filter(Boolean).join(", ")})`)
+              .map((i) => `${i.qty}x ${i.drink.name}${i.detail ? ` (${i.detail})` : ""}`)
               .join("; "),
           },
           { display_name: "Note", variable_name: "note", value: order.customer.note || "-" },

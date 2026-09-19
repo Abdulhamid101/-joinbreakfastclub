@@ -1,6 +1,6 @@
 // Shared server-side helpers for the drinks shop. Files in api/_lib are not
 // exposed as endpoints (Vercel ignores paths starting with "_").
-import { drinks, optionsSummary, shop, unitPrice } from "../../src/data/drinks.js";
+import { comboDiscount, drinks, itemDetail, shop, unitPrice } from "../../src/data/drinks.js";
 
 const PAYSTACK = "https://api.paystack.co";
 const naira = (n) => "₦" + Math.round(n).toLocaleString("en-NG");
@@ -37,6 +37,7 @@ export function readOrder(tx) {
 // ₦100 for ₦10,000 of drinks.
 export function priceOrder(order) {
   const lines = [];
+  const counted = [];
   let subtotal = 0;
   const problems = [];
 
@@ -49,12 +50,22 @@ export function priceOrder(order) {
       continue;
     }
     subtotal += price * qty;
-    const extras = [item.size, optionsSummary(drink, item.opts || {})].filter(Boolean).join(", ");
-    lines.push(`${qty} × ${drink.name} (${extras}) — ${naira(price * qty)}`);
+    counted.push({ drink, qty });
+    const detail = itemDetail(drink, item.size, item.opts || {});
+    lines.push(`${qty} × ${drink.name}${detail ? ` (${detail})` : ""} — ${naira(price * qty)}`);
   }
 
+  const { discount, pairs } = comboDiscount(counted);
   const deliveryFee = order?.fulfilment === "delivery" ? shop.deliveryFee : 0;
-  return { lines, subtotal, deliveryFee, total: subtotal + deliveryFee, problems };
+  return {
+    lines,
+    subtotal,
+    discount,
+    pairs,
+    deliveryFee,
+    total: subtotal - discount + deliveryFee,
+    problems,
+  };
 }
 
 export function checkPayment(tx) {
@@ -87,6 +98,7 @@ export function alertText(tx, check) {
     "",
     ...priced.lines.map((l) => `• ${l}`),
     ...priced.problems.map((p) => `⚠️ ${p}`),
+    priced.discount ? `Combo savings (${priced.pairs}×): −${naira(priced.discount)}` : null,
     priced.deliveryFee ? `Delivery fee: ${naira(priced.deliveryFee)}` : null,
     `Menu total: ${naira(priced.total)} · Paid: ${naira(paid)}`,
     "",
@@ -148,6 +160,7 @@ export async function notifyCustomer(order, check) {
     `Thanks for your order ${order.id} — payment received.`,
     "",
     ...check.priced.lines.map((l) => `• ${l}`),
+    check.priced.discount ? `Combo savings: −${naira(check.priced.discount)}` : null,
     check.priced.deliveryFee ? `Delivery: ${naira(check.priced.deliveryFee)}` : null,
     `Total paid: ${naira(check.paid)}`,
     "",

@@ -13,8 +13,9 @@ import DrinkCup from "./DrinkCup";
 import "./CartDrawer.css";
 
 const EMPTY_FORM = { name: "", phone: "", email: "", address: "", note: "" };
-const canPay = Boolean(shop.paystackPublicKey);
-const canWhatsApp = Boolean(shop.whatsappNumber);
+// Read at call time (not page load) so settings saved in /admin apply.
+const canPay = () => Boolean(shop.paystackPublicKey);
+const canWhatsApp = () => Boolean(shop.whatsappNumber);
 
 export default function CartDrawer() {
   const cart = useCart();
@@ -119,10 +120,16 @@ export default function CartDrawer() {
   function handleSend() {
     if (!validate(false)) return;
     const order = buildOrder();
-    const url = canWhatsApp ? whatsappUrl(order) : emailUrl(order);
-    if (canWhatsApp) window.open(url, "_blank", "noopener");
-    else window.location.href = url;
-    finish(order, canWhatsApp ? "whatsapp" : "email");
+    const url = canWhatsApp() ? whatsappUrl(order) : emailUrl(order);
+    finish(order, canWhatsApp() ? "whatsapp" : "email");
+    if (canWhatsApp()) {
+      // Phones (and Instagram's in-app browser) often block new tabs, so
+      // go straight to WhatsApp there; desktop opens WhatsApp Web in a tab.
+      const mobile = /Android|iPhone|iPad|iPod|Instagram|FBAN|FBAV/i.test(navigator.userAgent);
+      if (mobile || !window.open(url, "_blank", "noopener")) window.location.href = url;
+    } else {
+      window.location.href = url;
+    }
   }
 
   const title =
@@ -259,7 +266,7 @@ export default function CartDrawer() {
             noValidate
             onSubmit={(e) => {
               e.preventDefault();
-              if (canPay) handlePay();
+              if (canPay()) handlePay();
               else handleSend();
             }}
           >
@@ -277,7 +284,7 @@ export default function CartDrawer() {
                 required
               />
             </Field>
-            <Field label={canPay ? "Email (for your receipt)" : "Email (optional)"} error={errors.email}>
+            <Field label={canPay() ? "Email (for your receipt)" : "Email (optional)"} error={errors.email}>
               <input value={form.email} onChange={update("email")} type="email" autoComplete="email" />
             </Field>
             {cart.fulfilment === "delivery" && (
@@ -299,7 +306,7 @@ export default function CartDrawer() {
             {payError && <p className="checkout__error" role="alert">{payError}</p>}
 
             <div className="drawer__foot drawer__foot--stack">
-              {canPay && (
+              {canPay() && (
                 <button type="submit" className="btn drawer__primary" disabled={busy}>
                   {busy === "verifying"
                     ? "Confirming payment…"
@@ -309,17 +316,27 @@ export default function CartDrawer() {
                 </button>
               )}
               <button
-                type={canPay ? "button" : "submit"}
-                className={`btn ${canPay ? "btn--ghost" : "drawer__primary"}`}
-                onClick={canPay ? handleSend : undefined}
+                type={canPay() ? "button" : "submit"}
+                className={`btn ${canPay() ? "btn--ghost" : "drawer__primary"}`}
+                onClick={canPay() ? handleSend : undefined}
                 disabled={busy}
               >
-                {canWhatsApp ? "Send order on WhatsApp" : "Send order by email"}
+                {canWhatsApp()
+                  ? canPay()
+                    ? "Send order on WhatsApp"
+                    : `Place order on WhatsApp · ${formatNaira(cart.total)}`
+                  : "Send order by email"}
               </button>
-              {canPay && (
+              {!canPay() && canWhatsApp() && (
+                <p className="checkout__fine">
+                  Your order opens in WhatsApp — just hit send. We'll confirm it and share payment
+                  details (bank transfer) right there in the chat.
+                </p>
+              )}
+              {canPay() && (
                 <p className="checkout__fine">
                   Card, bank transfer & USSD via Paystack. Prefer to pay at pickup? Send it on{" "}
-                  {canWhatsApp ? "WhatsApp" : "email"} instead.
+                  {canWhatsApp() ? "WhatsApp" : "email"} instead.
                 </p>
               )}
             </div>
@@ -450,7 +467,7 @@ function Done({ placed, onClose }) {
         ? `${verifyMessage || "We couldn't confirm your payment yet."} Keep your reference: ${order.paymentRef}. If you were charged, you're covered — we'll sort it out.`
         : "Payment confirmed — thank you! We've got your order and a receipt is on its way to your email."
       : method === "whatsapp"
-        ? "WhatsApp should have opened with your order. Hit send there and we'll confirm and share payment details."
+        ? "WhatsApp should have opened with your order. Hit send — your order isn't placed until we receive that message. We'll confirm it and send payment details in the chat."
         : "Your email app should have opened with your order. Hit send and we'll confirm and share payment details.";
 
   return (
@@ -493,7 +510,7 @@ function Done({ placed, onClose }) {
           target={method === "whatsapp" ? "_blank" : undefined}
           rel="noopener"
         >
-          Didn't open? Send it again
+          {method === "whatsapp" ? "Open WhatsApp again" : "Didn't open? Send it again"}
         </a>
       )}
       <button type="button" className="btn" onClick={onClose}>

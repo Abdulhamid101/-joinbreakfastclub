@@ -35,7 +35,9 @@ export function orderSummaryText(order) {
     order.customer.email ? `Email: ${order.customer.email}` : null,
     how,
     order.customer.note ? `Note: ${order.customer.note}` : null,
-    order.paymentRef ? `Paid online — Paystack ref ${order.paymentRef}` : null,
+    order.paymentRef
+      ? `Paid online — Paystack ref ${order.paymentRef}`
+      : "Payment: please send me your payment details 🙏",
   ]
     .filter((l) => l !== null)
     .join("\n");

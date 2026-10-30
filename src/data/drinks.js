@@ -74,7 +74,7 @@ export const drinksPage = {
   sub: "Order ahead and grab yours at the meetup, or get it delivered anywhere in Abeokuta.",
   howItWorks: [
     { title: "Pick your drinks & bites", body: "Choose a size and how you like it. Pair any drink with a bite to save." },
-    { title: "Check out", body: "Pay securely online, or send the order to us on WhatsApp." },
+    { title: "Send it on WhatsApp", body: "Your order opens in WhatsApp. Hit send, and we'll confirm it and share payment details in the chat." },
     { title: "Sip", body: "Collect it at the Saturday meetup or have it brought to your door." },
   ],
   faqs: [

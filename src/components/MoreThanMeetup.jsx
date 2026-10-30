@@ -5,18 +5,26 @@ export default function MoreThanMeetup() {
   return (
     <section id="community" className="more section">
       <div className="section__inner more__grid">
-        <div>
-          <p className="eyebrow">{moreThanMeetup.eyebrow}</p>
-          <h2 className="more__heading">{moreThanMeetup.heading}</h2>
-          <p className="more__body measure">{moreThanMeetup.body}</p>
+        <div className="more__copy">
+          <p className="eyebrow" data-reveal>{moreThanMeetup.eyebrow}</p>
+          <h2 className="more__heading" data-reveal style={{ "--d": 1 }}>
+            {moreThanMeetup.heading}
+          </h2>
+          <p className="more__body" data-reveal style={{ "--d": 2 }}>
+            {moreThanMeetup.body}
+          </p>
         </div>
-        <div>
-          <ul className="more__tags">
-            {moreThanMeetup.initiatives.map((item) => (
-              <li key={item}>{item}</li>
+        <div className="more__panel" data-reveal style={{ "--d": 1 }}>
+          <ul className="more__list">
+            {moreThanMeetup.initiatives.map((item, i) => (
+              <li key={`${i}-${item}`}>
+                <span className="more__idx">{String(i + 1).padStart(2, "0")}</span>
+                {item}
+                <span className="more__arrow" aria-hidden="true">↗</span>
+              </li>
             ))}
           </ul>
-          <p className="more__closing measure">{moreThanMeetup.closing}</p>
+          <p className="more__closing">{moreThanMeetup.closing}</p>
         </div>
       </div>
     </section>

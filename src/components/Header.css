@@ -1,19 +1,22 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 10;
-  background: rgba(252, 240, 218, 0.88);
-  backdrop-filter: blur(6px);
+  z-index: 20;
+  background: rgba(252, 240, 218, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--color-rule);
 }
 
 .header__inner {
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: 1.1rem var(--space-md);
+  padding: 0.85rem var(--space-md);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
 }
 
 .header__mark {
@@ -26,10 +29,11 @@
   text-decoration: none;
   color: var(--color-charcoal);
   letter-spacing: -0.02em;
+  white-space: nowrap;
+  margin-right: auto;
 }
 
-/* NEW — the arc logo mark from the visual identity guide, added next to
-   the existing wordmark. */
+/* The arc logo mark from the visual identity guide. */
 .header__mark-icon {
   width: 22px;
   height: 15px;
@@ -37,6 +41,7 @@
   border-radius: 50%;
   position: relative;
   display: inline-block;
+  flex: none;
 }
 
 .header__mark-icon::after {
@@ -47,6 +52,35 @@
   border-radius: 50%;
 }
 
+/* ── Desktop links ────────────────────────────────────────────────────── */
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.header__link {
+  font-size: var(--step--1);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-charcoal);
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background-color 140ms ease;
+}
+
+.header__link:hover,
+.header__link[aria-current="page"] {
+  background: var(--color-bone-deep);
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 .header__cta {
   font-size: var(--step--1);
   font-weight: 700;
@@ -55,6 +89,7 @@
   background: var(--color-charcoal);
   padding: 0.6rem 1.25rem;
   border-radius: 999px;
+  white-space: nowrap;
   transition: opacity 160ms ease, transform 160ms ease;
 }
 
@@ -63,54 +98,28 @@
   transform: translateY(-1px);
 }
 
-@media (max-width: 640px) {
-  .header__inner {
-    padding: 1rem var(--space-sm);
-  }
-}
-
-/* Nav — Drinks link + cart button sit before the Join pill. */
-.header__nav {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.header__link {
-  font-size: var(--step--1);
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--color-charcoal);
-  padding: 0.6rem 0.75rem;
-  border-radius: 999px;
-}
-
-.header__link:hover,
-.header__link[aria-current="page"] {
-  background: var(--color-bone-deep);
-}
-
-.header__cart {
+.header__icon {
   position: relative;
   display: grid;
   place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border: none;
   border-radius: 50%;
   background: transparent;
   color: var(--color-charcoal);
   cursor: pointer;
+  flex: none;
 }
 
-.header__cart:hover {
+.header__icon:hover {
   background: var(--color-bone-deep);
 }
 
 .header__badge {
   position: absolute;
-  top: 0;
-  right: -2px;
+  top: 2px;
+  right: 0;
   min-width: 1.15rem;
   height: 1.15rem;
   padding: 0 0.3rem;
@@ -123,14 +132,184 @@
   text-align: center;
 }
 
-@media (max-width: 420px) {
-  .header__mark {
-    font-size: 0.95rem;
+/* ── Hamburger (animates to ✕) ────────────────────────────────────────── */
+.header__burger {
+  display: none;
+}
+
+.header__burger span,
+.header__burger span::before,
+.header__burger span::after {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 220ms ease, background-color 220ms ease;
+}
+
+.header__burger span {
+  position: relative;
+}
+
+.header__burger span::before,
+.header__burger span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.header__burger span::before {
+  transform: translateY(-6px);
+}
+
+.header__burger span::after {
+  transform: translateY(6px);
+}
+
+.header[data-open] .header__burger span {
+  background: transparent;
+}
+
+.header[data-open] .header__burger span::before {
+  transform: rotate(45deg);
+}
+
+.header[data-open] .header__burger span::after {
+  transform: rotate(-45deg);
+}
+
+/* ── Mobile menu panel ────────────────────────────────────────────────── */
+.mnav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 2;
+  background: var(--color-bone);
+  border-bottom: 1px solid var(--color-rule);
+  box-shadow: 0 24px 40px rgba(14, 48, 31, 0.12);
+  padding: 0.5rem var(--space-sm) var(--space-md);
+  max-height: calc(100dvh - 70px);
+  overflow-y: auto;
+  animation: mnav-in 220ms ease;
+}
+
+.mnav[hidden] {
+  display: none;
+}
+
+@keyframes mnav-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
   }
+}
+
+.mnav__links {
+  display: grid;
+}
+
+.mnav__links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0.25rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-charcoal);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-rule);
+  animation: mnav-item 260ms ease both;
+  animation-delay: calc(var(--i) * 40ms);
+}
+
+.mnav__links a span {
+  color: var(--color-terracotta);
+  transition: transform 160ms ease;
+}
+
+.mnav__links a:hover span {
+  transform: translateX(4px);
+}
+
+.mnav__links a[aria-current="page"] {
+  color: var(--color-terracotta-deep);
+}
+
+@keyframes mnav-item {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.mnav__cta {
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--space-md);
+  padding: 1rem;
+  font-size: var(--step-0);
+}
+
+.mnav__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.25rem;
+  margin-top: var(--space-sm);
+  font-size: var(--step--1);
+}
+
+.mnav__meta a {
+  color: var(--color-charcoal-soft);
+  text-decoration: none;
+}
+
+/* Absolute, not fixed: the header's backdrop blur would trap a fixed
+   element inside the header box. */
+.mnav__scrim {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 100dvh;
+  z-index: 1;
+  background: rgba(14, 48, 31, 0.35);
+  animation: mnav-fade 200ms ease;
+}
+
+@keyframes mnav-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Tablets & phones: links move into the hamburger menu. */
+@media (max-width: 860px) {
   .header__nav {
-    gap: 0.15rem;
+    display: none;
   }
-  .header__link {
-    padding: 0.5rem 0.55rem;
+  .header__burger {
+    display: grid;
+  }
+  .header__inner {
+    padding: 0.6rem var(--space-sm);
+    gap: 0.25rem;
+  }
+}
+
+/* Small phones: Join lives in the menu, keeping the bar uncluttered. */
+@media (max-width: 480px) {
+  .header__cta {
+    display: none;
+  }
+}
+
+@media (min-width: 861px) {
+  .mnav,
+  .mnav__scrim {
+    display: none;
   }
 }

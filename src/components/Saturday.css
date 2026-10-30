@@ -1,6 +1,20 @@
 .saturday {
   background: var(--color-terracotta);
   padding: var(--space-xl) var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.saturday::before {
+  content: "";
+  position: absolute;
+  left: -8rem;
+  bottom: -10rem;
+  width: 26rem;
+  height: 26rem;
+  border-radius: 50%;
+  border: 48px solid rgba(14, 48, 31, 0.08);
+  pointer-events: none;
 }
 
 .saturday__grid {
@@ -8,35 +22,35 @@
   grid-template-columns: 1.1fr 0.9fr;
   gap: var(--space-lg);
   align-items: center;
+  position: relative;
 }
 
-.eyebrow--light {
+.saturday .eyebrow--light {
   color: var(--color-charcoal);
-  opacity: 0.75;
+}
+
+.saturday .eyebrow::before {
+  box-shadow: 0.85rem 0 0 -0.05rem var(--color-bone);
 }
 
 .saturday__heading {
-  font-size: var(--step-2);
+  font-size: var(--step-3);
   color: var(--color-charcoal);
-  margin: var(--space-xs) 0 var(--space-sm);
+  margin: 1.1rem 0 1.25rem;
+  max-width: 13ch;
 }
 
 .saturday__body {
-  color: rgba(14, 48, 31, 0.75);
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: rgba(14, 48, 31, 0.8);
   margin-bottom: var(--space-md);
-}
-
-.btn--dark {
-  background: var(--color-charcoal);
-}
-
-.btn--dark:hover {
-  background: #0a2417;
 }
 
 .saturday__card {
   background: var(--color-white);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
+  transform: rotate(1deg);
   padding: var(--space-md);
   box-shadow: var(--shadow);
 }
@@ -139,4 +153,10 @@
 .saturday__next-arrow {
   font-size: 1.3rem;
   color: var(--color-butter);
+}
+
+@media (max-width: 800px) {
+  .saturday__card {
+    transform: none;
+  }
 }

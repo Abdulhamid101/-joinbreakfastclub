@@ -1,10 +1,5 @@
 .values {
-  background: var(--color-bone-deep);
-}
-
-.values__heading {
-  font-size: var(--step-2);
-  margin: var(--space-xs) 0 var(--space-lg);
+  background: var(--color-bone);
 }
 
 .values__grid {
@@ -12,28 +7,92 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-md) var(--space-lg);
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.25rem;
 }
 
-.values__item {
-  padding-top: var(--space-sm);
-  border-top: 1px solid var(--color-rule);
+.values__card {
+  position: relative;
+  display: grid;
+  align-content: end;
+  gap: 0.75rem;
+  min-height: clamp(19rem, 16rem + 8vw, 25rem);
+  padding: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: transform 400ms var(--ease-out);
+}
+
+.values__card:hover {
+  transform: translateY(-6px) rotate(-0.5deg);
+}
+
+.values__card--1 {
+  background: var(--color-terracotta);
+  color: var(--color-charcoal);
+}
+
+.values__card--2 {
+  background: var(--color-butter);
+  color: var(--color-charcoal);
+}
+
+.values__card--3 {
+  background: var(--color-charcoal);
+  color: var(--color-bone);
+}
+
+.values__card--3 .values__title {
+  color: var(--color-bone);
+}
+
+.values__num {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.6rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+}
+
+.values__icon {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 3.4rem;
+  height: 3.4rem;
+  padding: 0.8rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.values__card--3 .values__icon {
+  background: rgba(252, 240, 218, 0.1);
+  stroke: var(--color-butter);
 }
 
 .values__title {
-  font-size: var(--step-1);
-  margin-bottom: var(--space-xs);
-}
-
-.values__body {
-  color: var(--color-charcoal-soft);
-  font-size: var(--step--1);
-  max-width: 34ch;
+  font-size: clamp(2.8rem, 2rem + 3vw, 4.25rem);
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  font-weight: 800;
 }
 
 @media (max-width: 640px) {
-  .values__grid {
-    grid-template-columns: 1fr;
+  .values__card {
+    min-height: 15rem;
   }
+}
+
+.values__body {
+  font-size: 1rem;
+  line-height: 1.55;
+  max-width: 26ch;
+  opacity: 0.88;
 }

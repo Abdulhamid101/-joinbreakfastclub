@@ -1,20 +1,42 @@
 .belief {
-  background: var(--color-charcoal);
-  padding: var(--space-lg) var(--space-md);
-}
-
-.belief__inner {
-  max-width: 46rem;
-  margin: 0 auto;
-  display: grid;
-  gap: var(--space-sm);
+  background: var(--color-bone);
   text-align: center;
 }
 
+.belief__inner {
+  max-width: 62rem;
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(1.25rem, 1rem + 1.5vw, 2.25rem);
+  justify-items: center;
+}
+
+.belief__quote {
+  font-family: var(--font-accent);
+  font-size: clamp(4rem, 3rem + 4vw, 7rem);
+  line-height: 0.6;
+  height: 0.45em;
+  color: var(--color-terracotta);
+}
+
 .belief__line {
-  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 1.1rem + 2.2vw, 3rem);
   font-weight: 700;
-  font-size: var(--step-2);
-  color: var(--color-bone);
-  line-height: 1.25;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  color: var(--color-charcoal);
+  max-width: 24ch;
+}
+
+.belief__line:nth-child(3) {
+  color: var(--color-charcoal-soft);
+}
+
+.belief__line--accent {
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--color-terracotta-deep) !important;
+  font-size: clamp(1.8rem, 1.3rem + 2.4vw, 3.3rem);
+  max-width: none;
+  margin-top: 0.5rem;
 }

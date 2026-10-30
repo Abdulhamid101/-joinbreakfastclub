@@ -1,4 +1,5 @@
 import Hero from "../components/Hero";
+import Marquee from "../components/Marquee";
 import Belief from "../components/Belief";
 import Mission from "../components/Mission";
 import Values from "../components/Values";
@@ -16,6 +17,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <Marquee />
       <Belief />
       <Mission />
       <Values />

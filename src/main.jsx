@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { loadSiteContent } from "./lib/siteContent.js";
+import { startReveal } from "./lib/reveal.js";
 
 const root = createRoot(document.getElementById("root"));
 const path = window.location.pathname;
@@ -25,5 +26,6 @@ if (path === "/admin" || path.startsWith("/admin/")) {
         <App />
       </StrictMode>
     );
+    requestAnimationFrame(startReveal);
   });
 }

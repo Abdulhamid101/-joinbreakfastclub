@@ -4,46 +4,98 @@
 
 .more__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2.5rem, 1rem + 5vw, 6rem);
   align-items: start;
 }
 
+.more__copy {
+  display: grid;
+  gap: 1.4rem;
+  justify-items: start;
+  position: sticky;
+  top: 110px;
+}
+
 .more__heading {
-  font-size: var(--step-2);
-  margin: var(--space-xs) 0 var(--space-sm);
+  font-size: var(--step-3);
 }
 
 .more__body {
+  font-size: var(--step-1);
+  line-height: 1.55;
   color: var(--color-charcoal-soft);
 }
 
-.more__tags {
-  list-style: none;
-  margin: 0 0 var(--space-md);
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+.more__panel {
+  padding: clamp(1.25rem, 1rem + 1vw, 2rem);
+  border-radius: var(--radius-xl);
+  background: var(--color-white);
+  box-shadow: var(--shadow-soft);
 }
 
-.more__tags li {
-  font-size: var(--step--1);
-  font-weight: 600;
+.more__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.more__list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.05rem 0.5rem;
+  border-bottom: 1px solid var(--color-rule);
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition:
+    padding 300ms var(--ease-out),
+    background-color 300ms ease;
+  border-radius: 12px;
+}
+
+.more__list li:hover {
+  padding-left: 1rem;
+  background: var(--color-bone-soft);
+}
+
+.more__idx {
+  font-size: 0.78rem;
+  font-weight: 700;
   color: var(--color-terracotta-deep);
-  background: var(--color-bone-deep);
-  border-radius: 999px;
-  padding: 0.35rem 0.85rem;
+  letter-spacing: 0.06em;
+  min-width: 1.6rem;
+}
+
+.more__arrow {
+  margin-left: auto;
+  color: var(--color-terracotta);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: all 300ms var(--ease-out);
+}
+
+.more__list li:hover .more__arrow {
+  opacity: 1;
+  transform: none;
 }
 
 .more__closing {
-  color: var(--color-charcoal-soft);
-  font-style: italic;
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.4rem;
+  border-radius: var(--radius-md);
+  background: var(--color-terracotta);
+  color: var(--color-charcoal);
+  font-weight: 600;
+  line-height: 1.5;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 860px) {
   .more__grid {
     grid-template-columns: 1fr;
-    gap: var(--space-sm);
+  }
+  .more__copy {
+    position: static;
   }
 }

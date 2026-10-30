@@ -9,15 +9,15 @@ export default function Saturday() {
     <section id="saturday" className="saturday">
       <div className="section__inner saturday__grid">
         <div>
-          <p className="eyebrow eyebrow--light">{saturday.eyebrow}</p>
-          <h2 className="saturday__heading">{saturday.heading}</h2>
+          <p className="eyebrow eyebrow--light" data-reveal>{saturday.eyebrow}</p>
+          <h2 className="saturday__heading" data-reveal style={{ "--d": 1 }}>{saturday.heading}</h2>
           <p className="saturday__body measure">{saturday.body}</p>
           <a className="btn btn--dark" href="/calendar">
             {saturday.ctaLabel}
           </a>
         </div>
 
-        <div className="saturday__card">
+        <div className="saturday__card" data-reveal style={{ "--d": 1 }}>
           {next && (
             <a className="saturday__next" href="/calendar">
               <span className="saturday__next-date">

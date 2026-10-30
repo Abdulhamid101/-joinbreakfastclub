@@ -8,13 +8,16 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -27,8 +30,16 @@ body {
   color: var(--color-charcoal);
   font-family: var(--font-body);
   font-size: var(--step-0);
-  line-height: 1.55;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-butter);
+  color: var(--color-charcoal);
 }
 
 h1,
@@ -36,13 +47,21 @@ h2,
 h3 {
   font-family: var(--font-display);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
   margin: 0;
   color: var(--color-charcoal);
+  text-wrap: balance;
+}
+
+h3 {
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 p {
   margin: 0;
+  text-wrap: pretty;
 }
 
 a {
@@ -60,35 +79,53 @@ svg {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-terracotta);
+  outline: 2.5px solid var(--color-butter);
   outline-offset: 3px;
+  border-radius: 6px;
 }
 
+/* ── Eyebrow: small label above headings ─────────────────────────────── */
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-family: var(--font-body);
-  font-size: var(--step--1);
-  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-terracotta-deep);
   font-weight: 700;
 }
 
-/* NEW — script accent utility for occasional flourish text, per the
-   brand guideline's reserved use of the script font. Use sparingly. */
+.eyebrow::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0.85rem 0 0 -0.05rem var(--color-butter);
+  margin-right: 0.85rem;
+}
+
+.eyebrow--light,
+.on-dark .eyebrow {
+  color: var(--color-terracotta);
+}
+
 .script {
   font-family: var(--font-accent);
   font-weight: 400;
+  letter-spacing: 0;
 }
 
+/* ── Layout ──────────────────────────────────────────────────────────── */
 .section {
   padding: var(--space-xl) var(--space-md);
+  position: relative;
 }
 
-/* Anchor targets (footer/nav links, #join, #why-we-exist, etc.) land
-   right under the sticky header without this — the heading gets
-   hidden behind it on scroll-to. */
 section[id] {
-  scroll-margin-top: 88px;
+  scroll-margin-top: 84px;
 }
 
 .section__inner {
@@ -100,36 +137,171 @@ section[id] {
   max-width: var(--measure);
 }
 
-/* Button is now pill-shaped per the guideline, replacing the old sharp
-   corners — everywhere .btn is used updates automatically. */
+.on-dark {
+  background: var(--color-charcoal);
+  color: var(--color-bone);
+}
+
+.on-dark h2,
+.on-dark h3 {
+  color: var(--color-bone);
+}
+
+.display {
+  font-size: var(--step-3);
+}
+
+.sec-head {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+}
+
+.sec-head h2 {
+  font-size: var(--step-3);
+  max-width: 18ch;
+}
+
+.sec-head p:not(.eyebrow) {
+  font-size: var(--step-1);
+  color: var(--color-charcoal-soft);
+  max-width: 36rem;
+  line-height: 1.5;
+}
+
+.on-dark .sec-head p:not(.eyebrow) {
+  color: var(--color-on-dark-soft);
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.9rem 1.75rem;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1rem 1.6rem;
   background: var(--color-terracotta);
-  color: var(--color-white);
+  color: var(--color-charcoal);
   border: none;
   border-radius: 999px;
   font-size: var(--step--1);
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 160ms ease, transform 160ms ease, opacity 160ms ease;
+  white-space: nowrap;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    transform 200ms var(--ease-out),
+    box-shadow 200ms ease;
 }
 
 .btn:hover {
-  background: var(--color-terracotta-deep);
-  transform: translateY(-1px);
+  background: #93c83a;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -10px rgba(14, 48, 31, 0.45);
 }
 
 .btn:active {
-  transform: translateY(1px);
+  transform: translateY(0);
+}
+
+.btn .btn__arrow {
+  transition: transform 200ms var(--ease-out);
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(3px);
+}
+
+.btn--dark {
+  background: var(--color-charcoal);
+  color: var(--color-bone);
+}
+
+.btn--dark:hover {
+  background: var(--color-charcoal-deep);
+}
+
+.btn--light {
+  background: var(--color-bone);
+  color: var(--color-charcoal);
+}
+
+.btn--light:hover {
+  background: var(--color-white);
+}
+
+.btn--orange {
+  background: var(--color-butter);
+  color: var(--color-charcoal);
+}
+
+.btn--orange:hover {
+  background: #ffb236;
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-charcoal);
+  box-shadow: inset 0 0 0 1.5px rgba(14, 48, 31, 0.25);
+}
+
+.btn--outline:hover {
+  background: var(--color-white);
+  box-shadow: inset 0 0 0 1.5px var(--color-charcoal);
+}
+
+.on-dark .btn--outline,
+.btn--outline-light {
+  color: var(--color-bone);
+  box-shadow: inset 0 0 0 1.5px rgba(252, 240, 218, 0.35);
+  background: transparent;
+}
+
+.on-dark .btn--outline:hover,
+.btn--outline-light:hover {
+  background: rgba(252, 240, 218, 0.08);
+  box-shadow: inset 0 0 0 1.5px var(--color-bone);
+}
+
+/* ── Chips ───────────────────────────────────────────────────────────── */
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.chips li {
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(14, 48, 31, 0.06);
+  color: var(--color-charcoal);
+}
+
+/* ── Scroll reveal (only when JS has switched it on) ─────────────────── */
+.reveal-on [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 800ms var(--ease-out),
+    transform 800ms var(--ease-out);
+  transition-delay: calc(var(--d, 0) * 90ms);
+}
+
+.reveal-on [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
 }
 
 @media (max-width: 640px) {
   .section {
-    padding: var(--space-lg) var(--space-sm);
+    padding: var(--space-xl) 1.15rem;
   }
 }

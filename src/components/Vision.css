@@ -1,47 +1,78 @@
 .vision {
   background: var(--color-charcoal);
-  color: var(--color-bone);
-  text-align: center;
+  overflow: hidden;
 }
 
-.vision .eyebrow--onDark {
-  color: var(--color-terracotta-light, var(--color-terracotta));
+.vision::after {
+  content: "";
+  position: absolute;
+  left: -10rem;
+  bottom: -14rem;
+  width: 30rem;
+  height: 30rem;
+  border-radius: 50%;
+  border: 56px solid rgba(252, 161, 12, 0.1);
+  pointer-events: none;
+}
+
+.vision__head {
+  display: grid;
+  gap: 1.4rem;
+  justify-items: start;
+  max-width: 48rem;
+  margin-bottom: clamp(2.5rem, 2rem + 3vw, 4.5rem);
 }
 
 .vision__heading {
-  font-size: var(--step-2);
-  margin: var(--space-xs) auto var(--space-sm);
-  color: var(--color-bone);
+  font-size: var(--step-3);
 }
 
 .vision__intro {
-  color: var(--color-bone-deep);
-  margin: 0 auto var(--space-lg);
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--color-on-dark-soft);
 }
 
 .vision__lines {
   list-style: none;
-  margin: 0 auto var(--space-lg);
+  margin: 0;
   padding: 0;
-  max-width: 40rem;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
+  border-top: 1px solid rgba(252, 240, 218, 0.15);
 }
 
 .vision__lines li {
-  font-size: var(--step-1);
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 0.5rem + 2vw, 2rem);
+  padding: clamp(1.25rem, 1rem + 1vw, 2rem) 0;
+  border-bottom: 1px solid rgba(252, 240, 218, 0.15);
+  font-size: clamp(1.35rem, 1rem + 1.8vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
   color: var(--color-bone);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding-top: var(--space-sm);
+  transition: color 300ms ease;
 }
 
-.vision__lines li:first-child {
-  border-top: none;
-  padding-top: 0;
+.vision__lines li:hover {
+  color: var(--color-butter);
+}
+
+.vision__mark {
+  flex: none;
+  width: clamp(1.75rem, 1.4rem + 1vw, 2.5rem);
+  height: clamp(1.1rem, 0.9rem + 0.6vw, 1.6rem);
+  border-radius: 50%;
+  border: 3px solid var(--color-terracotta);
+}
+
+.vision__lines li:nth-child(2n) .vision__mark {
+  border-color: var(--color-butter);
 }
 
 .vision__closing {
-  font-size: var(--step-2);
-  color: var(--color-terracotta-light, var(--color-terracotta));
+  margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 3.6rem);
+  color: var(--color-terracotta);
+  text-align: right;
 }

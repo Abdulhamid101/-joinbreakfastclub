@@ -15,16 +15,22 @@ export default function Header({ path = "/" }) {
         <nav className="header__nav">
           <a
             className="header__link"
+            href="/calendar"
+            aria-current={path === "/calendar" ? "page" : undefined}
+          >
+            Calendar
+          </a>
+          <a
+            className="header__link"
             href="/drinks"
             aria-current={path === "/drinks" ? "page" : undefined}
           >
             Drinks
           </a>
-         
           <a className="header__cta" href={site.waitlistUrl}>
             Join
           </a>
-           <button
+          <button
             type="button"
             className="header__cart"
             onClick={cart.open}

@@ -127,6 +127,7 @@ export const footerColumns = [
     links: [
       { label: "What Is Breakfast Club", href: "/#why-we-exist" },
       { label: "The Experience", href: "/#experiences" },
+      { label: "Event Calendar", href: "/calendar" },
       { label: "Order Drinks", href: "/drinks" },
       { label: "Saturday Mornings", href: "/#saturday" },
       { label: "Who It's For", href: "/#audience" },

@@ -3,13 +3,16 @@ import Footer from "./components/Footer";
 import CartDrawer from "./components/CartDrawer";
 import HomePage from "./pages/HomePage";
 import DrinksPage from "./pages/DrinksPage";
+import CalendarPage from "./pages/CalendarPage";
 import { CartProvider } from "./shop/cart";
 
 // Tiny path router — no extra dependency. Add a page: add a line here and
 // its path to vercel.json is NOT needed (the catch-all rewrite covers it).
+// /admin is handled separately in main.jsx.
 const routes = {
   "/": HomePage,
   "/drinks": DrinksPage,
+  "/calendar": CalendarPage,
 };
 
 export default function App() {

@@ -41,7 +41,8 @@ export function priceOrder(order) {
   let subtotal = 0;
   const problems = [];
 
-  for (const item of order?.items || []) {
+  const items = Array.isArray(order?.items) ? order.items.slice(0, 50) : [];
+  for (const item of items) {
     const drink = drinks.find((d) => d.id === item.id);
     const price = drink ? unitPrice(drink, item.size, item.opts || {}) : null;
     const qty = Math.max(0, Math.min(20, Number(item.qty) || 0));
@@ -78,7 +79,7 @@ export function checkPayment(tx) {
 }
 
 function pickupLabel(iso) {
-  if (!iso) return "next meetup";
+  if (typeof iso !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return "next meetup";
   const d = new Date(`${iso}T00:00:00Z`);
   return d.toLocaleDateString("en-GB", {
     weekday: "long",
@@ -88,13 +89,32 @@ function pickupLabel(iso) {
   });
 }
 
+// Customer fields come from the browser — cap their length and strip
+// control characters before they go into alerts or emails.
+const field = (v, max = 300) =>
+  typeof v === "string"
+    ? v.replace(/[\u0000-\u0009\u000b-\u001f\u007f]/g, "").slice(0, max)
+    : "";
+const EMAIL = /^[^\s@<>()[\]\\,;:"]{1,64}@[a-z0-9.-]{1,180}\.[a-z]{2,24}$/i;
+
+function customerOf(order) {
+  const c = order?.customer || {};
+  return {
+    name: field(c.name, 100),
+    phone: field(c.phone, 30),
+    email: EMAIL.test(c.email || "") ? c.email : "",
+    address: field(c.address, 300),
+    note: field(c.note, 500),
+  };
+}
+
 export function alertText(tx, check) {
   const { order, priced, paid, amountOk } = check;
-  const c = order?.customer || {};
+  const c = customerOf(order);
   const when = pickupLabel(order?.pickupDate);
   return [
     amountOk ? "✅ PAID drinks order" : "⚠️ PAYMENT NEEDS CHECKING — amount doesn't match the menu",
-    `${order?.id || "?"} · ${naira(paid)} · ref ${tx.reference}`,
+    `${field(order?.id, 20) || "?"} · ${naira(paid)} · ref ${field(tx.reference, 100)}`,
     "",
     ...priced.lines.map((l) => `• ${l}`),
     ...priced.problems.map((p) => `⚠️ ${p}`),
@@ -149,15 +169,16 @@ export async function notifyOwner(subject, text) {
 }
 
 export async function notifyCustomer(order, check) {
-  const to = order?.customer?.email;
+  const c = customerOf(order);
+  const to = c.email;
   // Needs your own domain verified in Resend (RESEND_FROM set), otherwise
   // Resend only lets you email yourself.
   if (!to || !process.env.RESEND_API_KEY || !process.env.RESEND_FROM) return;
   const when = pickupLabel(order.pickupDate);
   const text = [
-    `Hi ${order.customer.name || "there"},`,
+    `Hi ${c.name || "there"},`,
     "",
-    `Thanks for your order ${order.id} — payment received.`,
+    `Thanks for your order ${field(order.id, 20)} — payment received.`,
     "",
     ...check.priced.lines.map((l) => `• ${l}`),
     check.priced.discount ? `Combo savings: −${naira(check.priced.discount)}` : null,
@@ -165,7 +186,7 @@ export async function notifyCustomer(order, check) {
     `Total paid: ${naira(check.paid)}`,
     "",
     order.fulfilment === "delivery"
-      ? `We'll deliver on ${when} to ${order.customer.address}, and call you before we head out.`
+      ? `We'll deliver on ${when} to ${c.address}, and call you before we head out.`
       : `Collect it at the Breakfast Club meetup on ${when}, from ${shop.meetupTime}. Your name will be on your cup.`,
     "",
     "See you Saturday,",
@@ -173,7 +194,7 @@ export async function notifyCustomer(order, check) {
   ]
     .filter((l) => l !== null)
     .join("\n");
-  await sendEmail({ to, subject: `Your Breakfast Club order ${order.id}`, text }).catch((e) =>
+  await sendEmail({ to, subject: `Your Breakfast Club order ${field(order.id, 20)}`, text }).catch((e) =>
     console.error("Customer email failed:", e)
   );
 }

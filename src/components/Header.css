@@ -122,3 +122,15 @@
   line-height: 1.15rem;
   text-align: center;
 }
+
+@media (max-width: 420px) {
+  .header__mark {
+    font-size: 0.95rem;
+  }
+  .header__nav {
+    gap: 0.15rem;
+  }
+  .header__link {
+    padding: 0.5rem 0.55rem;
+  }
+}

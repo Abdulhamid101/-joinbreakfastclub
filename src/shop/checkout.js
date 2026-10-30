@@ -3,8 +3,10 @@ import { formatNaira } from "./cart";
 
 export function makeOrderId() {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  // Crypto-grade randomness so order IDs can't be guessed.
+  const bytes = crypto.getRandomValues(new Uint8Array(6));
   let id = "";
-  for (let i = 0; i < 6; i++) id += chars[Math.floor(Math.random() * chars.length)];
+  for (const b of bytes) id += chars[b % chars.length];
   return `BC-${id}`;
 }
 
